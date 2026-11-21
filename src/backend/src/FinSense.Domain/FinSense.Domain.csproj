@@ -1,0 +1,3 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Zero external NuGet dependencies by architectural rule -->
+</Project>

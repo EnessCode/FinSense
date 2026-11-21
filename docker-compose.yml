@@ -1,0 +1,70 @@
+services:
+  # ============================================================================
+  # 1. Primary Relational Database (PostgreSQL 16)
+  # ============================================================================
+  finsense-postgres:
+    image: postgres:16-alpine
+    container_name: finsense-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-finsense_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change_me_local_pg_password}
+      POSTGRES_DB: ${POSTGRES_DB:-finsense_db}
+      TZ: Europe/Istanbul
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - finsense-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-finsense_user} -d ${POSTGRES_DB:-finsense_db}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
+
+  # ============================================================================
+  # 2. Internal Stateless AI & OCR Service (Python 3.11 + FastAPI)
+  #    Uncomment once `src/ai-service/Dockerfile` is created.
+  # ============================================================================
+  # finsense-ai:
+  #   build:
+  #     context: ./src/ai-service
+  #     dockerfile: Dockerfile
+  #   container_name: finsense-ai
+  #   restart: unless-stopped
+  #   environment:
+  #     INTERNAL_API_KEY: ${INTERNAL_API_KEY:-dev-internal-secret-key}
+  #     ENVIRONMENT: ${ENVIRONMENT:-development}
+  #   expose:
+  #     - "8000"
+  #   networks:
+  #     - finsense-net
+
+  # ============================================================================
+  # 3. Public Gateway & Core Domain API (.NET 8 LTS ASP.NET Core Web API)
+  #    Uncomment once `src/backend/Dockerfile` is created.
+  # ============================================================================
+  # finsense-api:
+  #   build:
+  #     context: ./src/backend
+  #     dockerfile: Dockerfile
+  #   container_name: finsense-api
+  #   restart: unless-stopped
+  #   depends_on:
+  #     finsense-postgres:
+  #       condition: service_healthy
+  #   ports:
+  #     - "5000:8080"
+  #   networks:
+  #     - finsense-net
+
+networks:
+  finsense-net:
+    name: finsense-net
+    driver: bridge
+
+volumes:
+  postgres_data:
+    name: finsense_postgres_data

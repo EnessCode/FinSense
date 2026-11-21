@@ -1,0 +1,67 @@
+using FinSense.Domain.Enums;
+
+namespace FinSense.Application.Features.Transactions.Contracts;
+
+public sealed record TransactionDto(
+    Guid Id,
+    Guid WorkspaceId,
+    Guid WalletId,
+    string WalletName,
+    Guid? CounterpartyWalletId,
+    string? CounterpartyWalletName,
+    Guid? CategoryId,
+    string? CategoryName,
+    string? CategoryIcon,
+    string? CategoryColorHex,
+    Guid? ReceiptId,
+    TransactionType Type,
+    decimal Amount,
+    string CurrencyCode,
+    DateOnly TransactionDate,
+    string? MerchantName,
+    string? Notes,
+    Guid? CreatedByUserId,
+    string? CreatedByDisplayName,
+    Guid? PaidByUserId,
+    string? PaidByDisplayName,
+    DateTime CreatedAtUtc);
+
+public sealed record TransactionReceiptDto(
+    Guid Id,
+    string ContentType,
+    long FileSizeBytes,
+    ReceiptStatus Status,
+    string? ExtractedMerchant,
+    DateOnly? ExtractedDate,
+    decimal? ExtractedTotal,
+    decimal? ExtractedTax,
+    decimal? ConfidenceScore,
+    DateTime CreatedAtUtc);
+
+public sealed record TransactionDetailDto(
+    Guid Id,
+    Guid WorkspaceId,
+    Guid WalletId,
+    string WalletName,
+    Guid? CounterpartyWalletId,
+    string? CounterpartyWalletName,
+    Guid? CategoryId,
+    string? CategoryName,
+    string? CategoryIcon,
+    string? CategoryColorHex,
+    TransactionType Type,
+    decimal Amount,
+    string CurrencyCode,
+    decimal OriginalAmount,
+    string OriginalCurrencyCode,
+    decimal ExchangeRate,
+    DateOnly TransactionDate,
+    string? MerchantName,
+    string? Notes,
+    Guid? CreatedByUserId,
+    string? CreatedByDisplayName,
+    Guid? PaidByUserId,
+    string? PaidByDisplayName,
+    string? IdempotencyKey,
+    DateTime CreatedAtUtc,
+    TransactionReceiptDto? Receipt);

@@ -1,0 +1,109 @@
+# ==============================================================================
+# FinSense Monorepo .gitignore
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. Environment Variables & Secrets (NEVER COMMIT REAL SECRETS)
+# ------------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+secrets.json
+appsettings.Development.json
+appsettings.Local.json
+appsettings.*.local.json
+*.pem
+
+# Bank statement exports (never commit personal financial statements)
+*.pdf
+*.xlsx
+*.csv
+
+# ------------------------------------------------------------------------------
+# 2. .NET / C# / Visual Studio / JetBrains Rider
+# ------------------------------------------------------------------------------
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+.vs/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.nupkg
+*.snupkg
+project.lock.json
+project.fragment.lock.json
+artifacts/
+TestResults/
+[Cc]overage/
+*.coverage
+*.coveragexml
+
+# ------------------------------------------------------------------------------
+# 3. Python / FastAPI (src/ai-service)
+# ------------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+ENV/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+
+# ------------------------------------------------------------------------------
+# 4. Node.js / React Native / Expo (src/mobile)
+# ------------------------------------------------------------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+.expo/
+.expo-shared/
+web-build/
+android/
+ios/
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+metro-health-check*
+
+# ------------------------------------------------------------------------------
+# 5. Docker, Databases, Logs & Local Storage Volumes
+# ------------------------------------------------------------------------------
+.docker/
+docker-data/
+postgres-data/
+minio-data/
+*.db
+*.sqlite
+*.sqlite3
+*.bak
+*.log
+
+# ------------------------------------------------------------------------------
+# 6. OS & Editor Files
+# ------------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+*~

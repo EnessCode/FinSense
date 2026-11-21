@@ -1,0 +1,43 @@
+{
+  "expo": {
+    "name": "FinSense",
+    "slug": "finsense",
+    "version": "1.0.0",
+    "sdkVersion": "58.0.0",
+    "orientation": "portrait",
+    "scheme": "finsense",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": false,
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "app.finsense.mobile"
+    },
+    "android": {
+      "package": "app.finsense.mobile",
+      "softwareKeyboardLayoutMode": "resize",
+      "adaptiveIcon": {
+        "backgroundColor": "#0D2B22"
+      }
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store",
+      "expo-asset",
+      "expo-font",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "FinSense, fiş görsellerinizi taramak için fotoğraf galerinize erişim ister.",
+          "cameraPermission": "FinSense, fiş fotoğrafı çekmek için kameranıza erişim ister."
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
